@@ -46,7 +46,7 @@
         }
 
         // 保存文件内容文件
-        document.getElementById('btn4').onclick = async () => {
+        document.getElementById('btn-save').onclick = async () => {
             const writable = await dirHandleInstance.createWritable();
             await writable.write('Hello World')
             await writable.close()
