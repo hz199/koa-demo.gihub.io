@@ -23,23 +23,6 @@
             // 我们也可以使用 showDirectoryPicker 来选择文件夹
             window.showDirectoryPicker().then((fileHandle) => {
                 console.log(fileHandle);
-                async function* getFilesRecursively(entry) {
-
-                if (entry.kind === "file") {
-                    const file = await entry.getFile();
-                    if (file !== null) {
-                    file.relativePath = getRelativePath(entry);
-                    yield file;
-                    }
-                } else if (entry.kind === "directory") {
-                    for await (const handle of entry.values()) {
-                    yield* getFilesRecursively(handle);
-                    }
-                }
-                }
-                for (const key of getFilesRecursively(fileHandle)) {
-                    console.log(key, 111);
-                }
             });
         }       
         
@@ -63,7 +46,6 @@
                 ],
             });
             console.log(fileHandle, 'fileHandle')
-            fileHandle[0].getFile().then((res) => { console.log(res)})
         } 
         
 
