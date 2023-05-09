@@ -23,10 +23,51 @@
             // 我们也可以使用 showDirectoryPicker 来选择文件夹
             window.showDirectoryPicker().then((fileHandle) => {
                 console.log(fileHandle);
+                async function* getFilesRecursively(entry) {
+
+                if (entry.kind === "file") {
+                    const file = await entry.getFile();
+                    if (file !== null) {
+                    file.relativePath = getRelativePath(entry);
+                    yield file;
+                    }
+                } else if (entry.kind === "directory") {
+                    for await (const handle of entry.values()) {
+                    yield* getFilesRecursively(handle);
+                    }
+                }
+                }
+                for await (const fileHandle of getFilesRecursively(directoryHandle)) {
+                    console.log(fileHandle, 111);
+                }
             });
         }       
         
 
+    </script>
+
+    <button id="btn3">选择特定文件</button>
+    <script>
+        document.getElementById('btn2').onclick = async () => {
+            const fileHandle = await window.showOpenFilePicker({
+                multiple: false,
+                excludeAcceptAllOption: true,
+                types: [
+                    {
+                    description: 'Images',
+                    accept: {
+                        'image/png': ['.png'],
+                        'image/jpeg': ['.jpg'],
+                    },
+                    },
+                ],
+            });
+            console.log(fileHandle, 'fileHandle')
+            fileHandle[0].getFile().then((res) => { console.log(res)})
+        } 
+        
+
+        
     </script>
 </body>
 
