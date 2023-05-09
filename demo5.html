@@ -12,6 +12,7 @@
     <button id="btn1">打开文件选择</button>
     <button id="btn2">打开文件夹</button>
     <button id="btn4">创建文件</button>
+    <button id="btn-save">保存内容</button>
     <button id="btn5">删除文件</button>
     <button id="btn6">移动文件</button>
     <script>
@@ -42,6 +43,13 @@
         document.getElementById('btn4').onclick = async () => {
             const fileHandle = await dirHandleInstance.getFileHandle('new-file.txt', { create: true });
             console.log(fileHandle, 'fileHandle')
+        }
+
+        // 保存文件内容文件
+        document.getElementById('btn4').onclick = async () => {
+            const writable = await dirHandleInstance.createWritable();
+            await writable.write('Hello World')
+            await writable.close()
         }
 
         // 删除文件
