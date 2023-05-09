@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>demo5</title>
+</head>
+
+<body>
+    <button id="btn1">打开文件选择</button>
+    <button id="btn2">打开文件夹</button>
+    <script>
+        document.getElementById('btn1').onclick = () => {
+            showOpenFilePicker().then((fileHandle) => {
+                console.log(fileHandle);
+            });
+        }
+        
+
+        document.getElementById('btn2').onclick = () => {
+            // 我们也可以使用 showDirectoryPicker 来选择文件夹
+            window.showDirectoryPicker().then((fileHandle) => {
+                console.log(fileHandle);
+            });
+        }       
+        
+
+    </script>
+</body>
+
+</html>
