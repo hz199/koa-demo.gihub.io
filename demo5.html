@@ -37,8 +37,8 @@
                     }
                 }
                 }
-                for await (const fileHandle of getFilesRecursively(directoryHandle)) {
-                    console.log(fileHandle, 111);
+                for await (const key of getFilesRecursively(fileHandle)) {
+                    console.log(key, 111);
                 }
             });
         }       
